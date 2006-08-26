@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="sua-server" default="dist" basedir=".">
+	<property name="src" location="src/" />
+	<property name="build" location="build/" />
+	<property name="dist" location="dist/" />
+
+	<target name="init">
+		<tstamp />
+	</target>
+
+	<target name="compile" depends="init" description="Compile the source.">
+		<mkdir dir="${build}" />
+		<javac srcdir="${src}" destdir="${build}" />
+	</target>
+
+	<target name="dist" depends="compile" description="Compile the source and create a JAR file.">
+		<mkdir dir="${dist}/lib/" />
+		<jar jarfile="${dist}/lib/sua-server-${DSTAMP}.jar" basedir="${build}" />
+	</target>
+
+	<target name="clean" description="Delete compiled files.">
+		<delete dir="${build}" />
+	</target>
+</project>
