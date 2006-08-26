@@ -1,4 +1,4 @@
-package de.cdauth.sua;
+package de.cdauth.sua.sua-server;
 
 import java.net.*;
 import java.io.*;

@@ -1,4 +1,4 @@
-package de.cdauth.sua;
+package de.cdauth.sua.sua-server;
 
 class SUAServer
 {
