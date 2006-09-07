@@ -1,0 +1,5 @@
+# Don't change this file!
+
+server_port = 6231
+server_priority = 5
+client_priority = 3
