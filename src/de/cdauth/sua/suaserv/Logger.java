@@ -1,6 +1,6 @@
 package de.cdauth.sua.suaserv;
 
-class Logger
+public class Logger
 {
 	public static void fatal(String a_message)
 	{

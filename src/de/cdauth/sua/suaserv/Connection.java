@@ -1,10 +1,13 @@
 package de.cdauth.sua.suaserv;
 
+import java.io.Reader;
+import java.io.Writer;
 import java.io.InputStreamReader;
-import java.io.BufferedReader;
-import java.io.PrintStream;
+import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Vector;
 
 /**
  * Provides a thread that is created for each connected client.
@@ -16,8 +19,24 @@ class Connection extends Thread
 	protected static int sm_connection_number_count = 0;
 	protected int m_connection_number;
 	protected Socket m_client;
-	protected BufferedReader m_in;
-	protected PrintStream m_out;
+	protected Reader m_in;
+	protected Writer m_out;
+	protected ClientOptions m_options;
+
+	protected static String[] sm_commands = {
+		"quit",         // 0
+		"agent",        // 1
+		"client",       // 2
+		"user",         // 3
+		"galaxy"        // 4
+	};
+	protected static int[] sm_commands_parameters = {
+		0,	// quit
+		1,	// agent
+		1,	// client
+		2,	// user
+		0	// galaxy
+	};
 
 	public Connection(Socket a_client_socket, ThreadGroup a_threadgroup)
 	{
@@ -27,8 +46,8 @@ class Connection extends Thread
 		m_client = a_client_socket;
 
 		try {
-			m_in = new BufferedReader(new InputStreamReader(m_client.getInputStream()));
-			m_out = new PrintStream(m_client.getOutputStream());
+			m_in = new InputStreamReader(m_client.getInputStream(), Charset.forName(ConfigurationManager.getStringSetting("charset")));
+			m_out = new OutputStreamWriter(m_client.getOutputStream(), Charset.forName(ConfigurationManager.getStringSetting("charset")));
 		}
 		catch(IOException e) {
 			try {
@@ -38,17 +57,63 @@ class Connection extends Thread
 			Logger.error("Error creating socket stream", e);
 			return;
 		}
+
+		m_options = new ClientOptions();
+
 		this.start();
 	}
 
 	public void run()
 	{
-		m_out.println("suaserv " + Release.getVersion());
+		try
+		{
+			println("suaserv " + Release.getVersion());
 
-		try {
-			while(run_command(m_in.readLine())){}
+			String line;
+			StringBuffer command_buffer = new StringBuffer();
+			Vector arguments_buffer = new Vector();
+			int i = -1;
+			boolean escaped = false;
+			boolean next = false;
+			char c;
+
+			connection:while(true)
+			{
+				c = readChar();
+				if(!escaped && c == '\n')
+				{
+					if(!parseCommand(command_buffer, arguments_buffer))
+						break connection;
+					command_buffer.setLength(0);
+					arguments_buffer.removeAllElements();
+					i = -1;
+					next = false;
+				}
+				else if(!escaped && Character.isISOControl(c)); // Ignore non-printable signs
+				else if(!escaped && c == ' ')
+					next = true;
+				else if(!escaped && c == '\\')
+					escaped = true;
+				else
+				{
+					escaped = false;
+					if(next)
+					{
+						i++;
+						arguments_buffer.addElement(new StringBuffer());
+						next = false;
+					}
+
+					StringBuffer this_buffer = (i == -1) ? command_buffer : (StringBuffer)arguments_buffer.elementAt(i);
+					this_buffer.append(c);
+				}
+			}
 		}
 		catch(IOException e) {}
+		catch(Exception e)
+		{
+			Logger.error("Uncaught exception in client "+Integer.toString(m_connection_number), e);
+		}
 		finally {
 			try {
 				m_client.close();
@@ -57,11 +122,175 @@ class Connection extends Thread
 		}
 	}
 
-	protected boolean run_command(String a_command)
+	protected boolean parseCommand(StringBuffer a_command, Vector a_arguments)
+		throws IOException
 	{
-		if(a_command.equals("quit")) return false;
+		String command = a_command.toString();
+		String[] arguments = new String[a_arguments.size()];
+		for(int i=0; i<a_arguments.size(); i++)
+			arguments[i] = ((StringBuffer)a_arguments.elementAt(i)).toString();
+		return runCommand(command, arguments);
+	}
 
-		m_out.println(m_connection_number + ": " + a_command);
+	protected void requireAuth()
+		throws AccessViolationException
+	{
+		if(m_options.getUser() == null)
+			throw new AccessViolationException("Login required.");
+	}
+
+	protected boolean runCommand(String a_command, String[] a_arguments)
+		throws IOException
+	{
+		if(sm_commands.length != sm_commands_parameters.length)
+			throw new NoSuchFieldError("sm_commands.length and sm_commands_parameters.length are different in de.cdauth.sua.suaserv.Connection.");
+
+		try
+		{
+			int command = 0;
+			boolean command_found = false;
+			for(int i=0; i<sm_commands.length; i++)
+			{
+				if(sm_commands[i].equals(a_command))
+				{
+					command = i;
+					command_found = true;
+					break;
+				}
+			}
+			if(!command_found)
+			{
+				sendStatusCode(2, 0); // Command not found
+				return true;
+			}
+			if(a_arguments.length < sm_commands_parameters[command])
+			{
+				sendStatusCode(2, 1); // Insufficient arguments
+				return true;
+			}
+
+			switch(command)
+			{
+				case 0: // quit
+					return false;
+				case 1: // agent
+					if(m_options.getAgent() != null)
+					{
+						sendStatusCode(2, 0);
+						break;
+					}
+					m_options.setAgent(a_arguments[0]);
+					sendStatusCode(1, 0);
+					break;
+				case 2: // client
+					m_options.setClient(a_arguments[0]);
+					sendStatusCode(1, 0);
+					break;
+				case 3: // user
+					if(m_options.getAgent() == null || m_options.getClient() == null)
+					{
+						sendStatusCode(2, 2);
+						break;
+					}
+					String username = User.resolveName(a_arguments[0]);
+					if(username != null)
+					{
+						User me = User.getInstance(username);
+						if(me.checkPassword(a_arguments[1]))
+						{
+							m_options.setUser(username);
+							sendStatusCode(1, 0);
+							break;
+						}
+					}
+					sendStatusCode(2, 6);
+					break;
+				case 4: // galaxy
+					requireAuth();
+					try
+					{
+						if(a_arguments.length >= 1)
+						{
+							Galaxy galaxy = Galaxy.getInstance(Integer.parseInt(a_arguments[0]));
+							if(a_arguments.length >= 3) // 3 arguments: print planet information
+							{
+								int system = Integer.parseInt(a_arguments[1]);
+								int planet = Integer.parseInt(a_arguments[2]);
+								if(galaxy.isOccupied(system, planet))
+								{
+									sendData(galaxy.getPlanetName(system, planet));
+									sendData(galaxy.getPlanetOwner(system, planet));
+									sendData(galaxy.getPlanetOwnerFlag(system, planet));
+									sendData(galaxy.getPlanetOwnerAlliance(system, planet));
+								}
+								else
+									sendStatusCode(3, 0);
+							}
+							else if(a_arguments.length >= 2) // 2 arguments: print planet count in passed system
+							{
+								int system = Integer.parseInt(a_arguments[1]);
+								sendData(Integer.toString(galaxy.getPlanetCount(system)));
+							}
+							else // 1 argument: print system count in passed galaxy
+								sendData(Integer.toString(galaxy.getSystemCount()));
+						}
+						else // 0 arguments: print galaxy count in the universe
+							sendData(Integer.toString(Galaxy.getGalaxyCount()));
+					}
+					catch(UniverseException e)
+					{
+						sendStatusCode(2, 7); // Location not found in the universe
+					}
+					break;
+			}
+		}
+		catch(IOException e)
+		{
+			sendStatusCode(2, 4); // I/O error
+			Logger.error("IOException on client "+Integer.toString(m_connection_number), e);
+		}
+		catch(NumberFormatException e)
+		{
+			sendStatusCode(2, 5); // Invalid number format error
+		}
+		catch(AccessViolationException e)
+		{
+			sendStatusCode(2, 3); // Access violation error
+		}
+
 		return true;
+	}
+
+	public void sendStatusCode(int a_major, int a_minor)
+		throws IOException
+	{
+		println(Integer.toString(a_major)+" "+Integer.toString(a_minor));
+	}
+
+	public void sendData(String a_data)
+		throws IOException
+	{
+		sendStatusCode(0, a_data.length());
+		println(a_data);
+	}
+
+	protected void println(String a_line)
+		throws IOException
+	{
+		m_out.write(a_line+"\n");
+		m_out.flush();
+	}
+
+	protected char readChar()
+		throws IOException
+	{
+		char[] c = new char[1];
+		m_in.read(c, 0, 1);
+		while(c.length < 1)
+		{
+			try{Thread.sleep(50);}catch(InterruptedException e){}
+			m_in.read(c, 0, 1);
+		}
+		return c[0];
 	}
 }

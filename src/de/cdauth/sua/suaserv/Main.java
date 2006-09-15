@@ -15,7 +15,7 @@ class Main
 			// Start server thread
 			new Server();
 		}
-		catch(Throwable e)
+		catch(Exception e)
 		{
 			Logger.fatal("Error initialising server", e);
 		}

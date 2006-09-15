@@ -29,7 +29,7 @@ class Server extends Thread
 				Socket client_socket = m_listen_socket.accept();
 				Connection c = new Connection(client_socket, m_threadgroup);
 			}
-			catch(Throwable e)
+			catch(Exception e)
 			{
 				Logger.error("Could not accept connection", e);
 			}
