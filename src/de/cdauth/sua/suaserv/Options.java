@@ -5,6 +5,12 @@ import psk.cmdline.BooleanToken;
 import psk.cmdline.StringToken;
 import psk.cmdline.TokenOptions;
 
+/**
+ * This static class manages all passed command line options.
+ * @author Candid Dauth
+ * @version 2.0.0
+*/
+
 class Options
 {
 	static protected ApplicationSettings sm_arguments = new ApplicationSettings();
@@ -28,6 +34,12 @@ class Options
 	static protected String sm_config = null;
 	static protected String sm_defaults = null;
 	static protected String sm_database = null;
+
+	/**
+	 * Reads the passed command line options and saves them into variables.
+	 * @author Candid Dauth
+	 * @version 2.0.0
+	*/
 
 	public static void load(String[] a_args)
 		throws Exception
@@ -53,16 +65,16 @@ class Options
 
 	public static String getConfig()
 	{
-		return (sm_config == null) ? null : new String(sm_config);
+		return sm_config;
 	}
 
 	public static String getDefaults()
 	{
-		return (sm_defaults == null) ? null : new String(sm_defaults);
+		return sm_defaults;
 	}
 
 	public static String getDatabase()
 	{
-		return (sm_database == null) ? null : new String(sm_database);
+		return sm_database;
 	}
 }

@@ -1,0 +1,12 @@
+||Major number||Minor number||Meaning
+|{{0}}|x|The next line contains binary data of x bytes length.
+|{{1}}|{{0}}|Command successfully executed.
+|{{2}}|{{0}}|Unknown command.
+|{{2}}|{{1}}|Insufficient arguments.
+|{{2}}|{{2}}|Send client ID and user agent first.
+|{{2}}|{{3}}|Access violation.
+|{{2}}|{{4}}|I/O error.
+|{{2}}|{{5}}|Invalid number format.
+|{{2}}|{{6}}|Login failed.
+|{{2}}|{{7}}|Coordinates not found in the universe.
+|{{3}}|{{0}}|Planet not occupied.

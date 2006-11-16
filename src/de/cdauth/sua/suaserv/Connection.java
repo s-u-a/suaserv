@@ -6,12 +6,14 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
 import java.io.IOException;
+import java.io.EOFException;
 import java.net.Socket;
 import java.util.Vector;
 
 /**
  * Provides a thread that is created for each connected client.
  * @author Candid Dauth
+ * @version 2.0.0
 */
 
 class Connection extends Thread
@@ -23,6 +25,13 @@ class Connection extends Thread
 	protected Writer m_out;
 	protected ClientOptions m_options;
 
+	/**
+	 * The commands can easily be renamed here, but the order is important
+	 * and has to be changed in sm_commands_parameters and runCommand, too.
+	 * @author Candid Dauth
+	 * @version 2.0.0
+	*/
+
 	protected static String[] sm_commands = {
 		"quit",         // 0
 		"agent",        // 1
@@ -30,6 +39,15 @@ class Connection extends Thread
 		"user",         // 3
 		"galaxy"        // 4
 	};
+
+	/**
+	 * This static member defines how many parameters a certain
+	 * command wants to have, if a smaller count is passed, an
+	 * exception is thrown.
+	 * @author Candid Dauth
+	 * @version 2.0.0
+	*/
+
 	protected static int[] sm_commands_parameters = {
 		0,	// quit
 		1,	// agent
@@ -37,6 +55,14 @@ class Connection extends Thread
 		2,	// user
 		0	// galaxy
 	};
+
+	/**
+	 * Initialises the new client thread.
+	 * @param a_client_socket The client socket returned by java.net.ServerSocket.accept().
+	 * @param a_threadgroup The thread group for all client connections.
+	 * @author Candid Dauth
+	 * @version 2.0.0
+	*/
 
 	public Connection(Socket a_client_socket, ThreadGroup a_threadgroup)
 	{
@@ -60,8 +86,18 @@ class Connection extends Thread
 
 		m_options = new ClientOptions();
 
+		Logger.debug("Client " + m_connection_number + " connected.");
+
 		this.start();
 	}
+
+	/**
+	 * This method is responsible for the communication between client
+	 * and server. It reads the commands that the client sends, parses
+	 * them, and passes them to the command processing method.
+	 * @author Candid Dauth
+	 * @version 2.0.0
+	*/
 
 	public void run()
 	{
@@ -71,7 +107,7 @@ class Connection extends Thread
 
 			String line;
 			StringBuffer command_buffer = new StringBuffer();
-			Vector arguments_buffer = new Vector();
+			Vector<StringBuffer> arguments_buffer = new Vector<StringBuffer>();
 			int i = -1;
 			boolean escaped = false;
 			boolean next = false;
@@ -109,7 +145,14 @@ class Connection extends Thread
 				}
 			}
 		}
-		catch(IOException e) {}
+		catch(EOFException e)
+		{
+			Logger.debug("Client " + m_connection_number + " quit improperly.");
+		}
+		catch(IOException e)
+		{
+			Logger.debug("Client " + m_connection_number + " died because of an IOException.");
+		}
 		catch(Exception e)
 		{
 			Logger.error("Uncaught exception in client "+Integer.toString(m_connection_number), e);
@@ -117,20 +160,37 @@ class Connection extends Thread
 		finally {
 			try {
 				m_client.close();
+				Logger.debug("Closed connection to client " + m_connection_number + ".");
 			}
 			catch(IOException e2) {}
 		}
 	}
 
-	protected boolean parseCommand(StringBuffer a_command, Vector a_arguments)
+	/**
+	 * Converts the passed buffer elements to usable data types and calls
+	 * the command processing method.
+	 * @param a_command A string buffer that contains the command name.
+	 * @param a_arguments A vector that contains StringBuffer objects with the arguments passed with the command.
+	 * @author Candid Dauth
+	 * @version 2.0.0
+	*/
+
+	protected boolean parseCommand(StringBuffer a_command, Vector<StringBuffer> a_arguments)
 		throws IOException
 	{
 		String command = a_command.toString();
 		String[] arguments = new String[a_arguments.size()];
 		for(int i=0; i<a_arguments.size(); i++)
-			arguments[i] = ((StringBuffer)a_arguments.elementAt(i)).toString();
+			arguments[i] = a_arguments.elementAt(i).toString();
 		return runCommand(command, arguments);
 	}
+
+	/**
+	 * Ensures that the client is logged in.
+	 * @throws AccessViolationException The client is not logged in.
+	 * @author Candid Dauth
+	 * @version 2.0.0
+	*/
 
 	protected void requireAuth()
 		throws AccessViolationException
@@ -138,6 +198,15 @@ class Connection extends Thread
 		if(m_options.getUser() == null)
 			throw new AccessViolationException("Login required.");
 	}
+
+	/**
+	 * Calls all needed functions for a command to be run.
+	 * @param a_command The command that should be executed.
+	 * @param a_arguments A string array of all passed arguments.
+	 * @return Whether the command could successfully be executed.
+	 * @author Candid Dauth
+	 * @version 2.0.0
+	*/
 
 	protected boolean runCommand(String a_command, String[] a_arguments)
 		throws IOException
@@ -192,9 +261,9 @@ class Connection extends Thread
 						sendStatusCode(2, 2);
 						break;
 					}
-					String username = User.resolveName(a_arguments[0]);
-					if(username != null)
+					try
 					{
+						String username = User.resolveName(a_arguments[0]);
 						User me = User.getInstance(username);
 						if(me.checkPassword(a_arguments[1]))
 						{
@@ -203,6 +272,7 @@ class Connection extends Thread
 							break;
 						}
 					}
+					catch(UserException e){}
 					sendStatusCode(2, 6);
 					break;
 				case 4: // galaxy
@@ -261,11 +331,26 @@ class Connection extends Thread
 		return true;
 	}
 
+	/**
+	 * Sends the needed output lines to the client to transmit a status code.
+	 * @param a_major The major status code number.
+	 * @param a_minor The minor status code number.
+	 * @author Candid Dauth
+	 * @version 2.0.0
+	*/
+
 	public void sendStatusCode(int a_major, int a_minor)
 		throws IOException
 	{
 		println(Integer.toString(a_major)+" "+Integer.toString(a_minor));
 	}
+
+	/**
+	 * Prepares and performs raw data transmission to the client.
+	 * @param a_data The data that should be sent.
+	 * @author Candid Dauth
+	 * @version 2.0.0
+	*/
 
 	public void sendData(String a_data)
 		throws IOException
@@ -274,6 +359,13 @@ class Connection extends Thread
 		println(a_data);
 	}
 
+	/**
+	 * Sends the specified string to the client, followed by a line break.
+	 * @param a_line The string that should be sent.
+	 * @author Candid Dauth
+	 * @version 2.0.0
+	*/
+
 	protected void println(String a_line)
 		throws IOException
 	{
@@ -281,14 +373,29 @@ class Connection extends Thread
 		m_out.flush();
 	}
 
+	/**
+	 * Reads one character from the client, ensuring that the specified charset is used.
+	 * @return The read character.
+	 * @author Candid Dauth
+	 * @version 2.0.0
+	*/
+
 	protected char readChar()
-		throws IOException
+		throws IOException,EOFException
 	{
 		char[] c = new char[1];
-		m_in.read(c, 0, 1);
+		if(m_in.read(c, 0, 1) == -1)
+			throw new EOFException("Connection closed.");
 		while(c.length < 1)
 		{
-			try{Thread.sleep(50);}catch(InterruptedException e){}
+			try
+			{
+				Thread.sleep(200);
+			}
+			catch(InterruptedException e)
+			{
+				Logger.debug("InterruptedException in Connection.readChar()", e);
+			}
 			m_in.read(c, 0, 1);
 		}
 		return c[0];

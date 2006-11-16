@@ -1,5 +1,11 @@
 package de.cdauth.sua.suaserv;
 
+/**
+ * This static class contains some constants that define the source version of the program.
+ * @author Candid Dauth
+ * @version 2.0.0
+*/
+
 class Release
 {
 	static final private String sm_version_prefix = "";

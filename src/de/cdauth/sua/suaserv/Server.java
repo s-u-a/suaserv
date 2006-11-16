@@ -4,6 +4,13 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * The server thread that listens on the specified port and
+ * starts new threads for each new connection
+ * @author Candid Dauth
+ * @version 2.0.0
+*/
+
 class Server extends Thread
 {
 	protected ServerSocket m_listen_socket;

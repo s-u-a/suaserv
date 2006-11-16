@@ -1,5 +1,12 @@
 package de.cdauth.sua.suaserv;
 
+/**
+ * Every instance of this class represents some information about a
+ * client, such as the user agent, the client id, and the current user.
+ * @author Candid Dauth
+ * @version 2.0.0
+*/
+
 public class ClientOptions
 {
 	protected String m_client = null;
