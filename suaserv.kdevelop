@@ -9,7 +9,7 @@
     <ignoreparts/>
     <projectdirectory>.</projectdirectory>
     <absoluteprojectpath>false</absoluteprojectpath>
-    <description></description>
+    <description/>
     <versioncontrol>kdevsubversion</versioncontrol>
   </general>
   <kdevcustomproject>
@@ -75,12 +75,12 @@
   </kdevantproject>
   <kdevdebugger>
     <general>
-      <programargs></programargs>
-      <gdbpath></gdbpath>
-      <dbgshell></dbgshell>
-      <configGdbScript></configGdbScript>
-      <runShellScript></runShellScript>
-      <runGdbScript></runGdbScript>
+      <programargs/>
+      <gdbpath/>
+      <dbgshell/>
+      <configGdbScript/>
+      <runShellScript/>
+      <runGdbScript/>
       <breakonloadinglibs>true</breakonloadinglibs>
       <separatetty>false</separatetty>
       <floatingtoolbar>false</floatingtoolbar>
@@ -99,11 +99,14 @@
     </projectdoc>
   </kdevdocumentation>
   <ctagspart>
-    <customArguments></customArguments>
-    <customTagfilePath></customTagfilePath>
+    <customArguments/>
+    <customTagfilePath/>
   </ctagspart>
   <kdevfileview>
-    <groups/>
+    <groups>
+      <hidenonprojectfiles>false</hidenonprojectfiles>
+      <hidenonlocation>false</hidenonlocation>
+    </groups>
     <tree>
       <hidepatterns>*.o,*.lo,CVS</hidepatterns>
       <hidenonprojectfiles>false</hidenonprojectfiles>

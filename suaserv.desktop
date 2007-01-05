@@ -1,0 +1,19 @@
+[Desktop Entry]
+Comment=
+Comment[de]=
+Encoding=UTF-8
+Exec=./suaserv
+GenericName=S-U-A version 2 server
+GenericName[de]=S-U-A version 2 server
+Icon=
+MimeType=
+Name=suaserv
+Name[de]=suaserv
+Path=
+StartupNotify=true
+Terminal=true
+TerminalOptions=\s--noclose
+Type=Application
+X-DCOP-ServiceType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

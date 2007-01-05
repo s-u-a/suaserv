@@ -16,7 +16,7 @@ import java.util.Vector;
  * @version 2.0.0
 */
 
-class Connection extends Thread
+public class Connection extends Thread
 {
 	protected static int sm_connection_number_count = 0;
 	protected int m_connection_number;
@@ -88,7 +88,7 @@ class Connection extends Thread
 
 		Logger.debug("Client " + m_connection_number + " connected.");
 
-		this.start();
+		start();
 	}
 
 	/**
@@ -147,7 +147,7 @@ class Connection extends Thread
 		}
 		catch(EOFException e)
 		{
-			Logger.debug("Client " + m_connection_number + " quit improperly.");
+			Logger.debug("Client " + m_connection_number + " quit improperly" + (m_options.getAgent() == null ? "" : " (agent "+m_options.getAgent()+")") + ".");
 		}
 		catch(IOException e)
 		{
@@ -160,7 +160,7 @@ class Connection extends Thread
 		finally {
 			try {
 				m_client.close();
-				Logger.debug("Closed connection to client " + m_connection_number + ".");
+				Logger.debug("Closed connection to client " + m_connection_number + (m_options.getAgent() == null ? "" : " (agent "+m_options.getAgent()+")") + ".");
 			}
 			catch(IOException e2) {}
 		}
@@ -281,7 +281,7 @@ class Connection extends Thread
 					{
 						if(a_arguments.length >= 1)
 						{
-							Galaxy galaxy = Galaxy.getInstance(Integer.parseInt(a_arguments[0]));
+							Galaxy galaxy = Galaxy.getInstance(a_arguments[0]);
 							if(a_arguments.length >= 3) // 3 arguments: print planet information
 							{
 								int system = Integer.parseInt(a_arguments[1]);

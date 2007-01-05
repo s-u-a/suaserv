@@ -11,25 +11,35 @@ import java.net.Socket;
  * @version 2.0.0
 */
 
-class Server extends Thread
+public class Server extends Thread
 {
 	protected ServerSocket m_listen_socket;
 	protected ThreadGroup m_threadgroup;
 
 	public Server()
-		throws IOException
 	{
 		super("server");
 		setPriority(ConfigurationManager.getIntSetting("server_priority"));
 
-		m_listen_socket = new ServerSocket(ConfigurationManager.getIntSetting("server_port"));
+		Logger.debug("Starting Server thread");
 
-		m_threadgroup = new ThreadGroup("clients");
 		start();
 	}
 
 	public void run()
 	{
+		try
+		{
+			Logger.debug("This is the Server thread");
+
+			m_listen_socket = new ServerSocket(ConfigurationManager.getIntSetting("server_port"));
+			m_threadgroup = new ThreadGroup("clients");
+		}
+		catch(Exception e)
+		{
+			Logger.fatal("Exception in Server thread", e);
+		}
+
 		while(true) {
 			try
 			{

@@ -12,20 +12,27 @@ public class User extends JDBCDataset
 	 * As every class that uses Instantiation, this static method returns
 	 * an instance for the specified user to ensure that not two instances
 	 * of the same user exist.
-	 * @param a_username The user's account id.
+	 * @param a_id The user's account id.
 	 * @author Candid Dauth
 	 * @version 2.0.0
 	*/
 
-	public static User getInstance(String a_username)
+	public static User getInstance(String a_id)
+		throws InstantiationException
 	{
-		User instance = (User)getInstance(User.class, a_username);
+		User instance = (User)getInstance(User.class, a_id);
 		if(instance == null)
 		{
-			instance = new User(a_username);
-			addInstance(User.class, a_username, new User(a_username));
+			instance = new User(a_id);
+			addInstance(User.class, a_id, instance);
 		}
 		return instance;
+	}
+
+	private User(String a_id)
+		throws InstantiationException
+	{
+		m_id = a_id;
 	}
 
 	/**
@@ -46,10 +53,5 @@ public class User extends JDBCDataset
 	public boolean checkPassword(String a_password)
 	{
 		return true;
-	}
-
-	private User(String username)
-	{
-		m_id = username;
 	}
 }

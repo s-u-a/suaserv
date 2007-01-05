@@ -1,2 +1,2 @@
 #!/bin/bash
-ant dist
+ant -q dist

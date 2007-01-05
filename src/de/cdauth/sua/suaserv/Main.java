@@ -6,7 +6,7 @@ package de.cdauth.sua.suaserv;
  * @author Candid Dauth
 */
 
-class Main
+public class Main
 {
 	/**
 	 * The main method is called when suaserv is started.
@@ -22,8 +22,20 @@ class Main
 			// Load properties file
 			ConfigurationManager.load();
 
+			// Open database connection
+			Database.initConnection();
+
 			// Start server thread
 			new Server();
+
+			// Start eventhandler thread
+			new EventHandler();
+
+			// Start daemon thread
+			new Daemon();
+
+			// Start IM thread
+			new InstantMessenger();
 		}
 		catch(Exception e)
 		{

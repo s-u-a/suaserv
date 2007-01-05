@@ -6,7 +6,7 @@ package de.cdauth.sua.suaserv;
  * @version 2.0.0
 */
 
-class Release
+public class Release
 {
 	static final private String sm_version_prefix = "";
 	static final private String sm_version_major = "2";

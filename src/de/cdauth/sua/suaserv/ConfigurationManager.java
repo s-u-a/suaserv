@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
  * @version 2.0.0
 */
 
-class ConfigurationManager
+public class ConfigurationManager
 {
 	private static Properties sm_default_properties = null;
 	private static Properties sm_properties = null;
@@ -36,8 +36,8 @@ class ConfigurationManager
 	{
 		sm_default_properties_file = Options.getDefaults();
 		sm_properties_file = Options.getConfig();
-		sm_default_properties.load(new FileInputStream(sm_default_properties_file));
-		sm_properties.load(new FileInputStream(sm_properties_file));
+		sm_default_properties.loadFromXML(new FileInputStream(sm_default_properties_file));
+		sm_properties.loadFromXML(new FileInputStream(sm_properties_file));
 	}
 
 	/**

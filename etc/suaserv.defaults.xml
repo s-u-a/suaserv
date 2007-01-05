@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="server_port">6231</entry>
+	<entry key="server_priority">5</entry>
+
+	<entry key="client_priority">3</entry>
+
+	<entry key="eventhandler_priority">2</entry>
+	<entry key="eventhandler_reload_seconds">60</entry>
+
+	<entry key="instantmessenger_priority">1</entry>
+
+	<entry key="daemon_priority">1</entry>
+	<entry key="daemon_hour">4</entry>
+
+	<entry key="database_driver">org.postgresql.Driver</entry>
+
+	<entry key="charset">UTF-8</entry>
+
+	<entry key="items_file">/etc/suaserv/items.xml</entry>
+</properties>

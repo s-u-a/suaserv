@@ -1,0 +1,58 @@
+<!ELEMENT items (building*,research*,robot*,ship*,defence*)>
+
+<!ELEMENT building (costs?,time?,production?,size?,dependencies?)>
+<!ATTLIST building
+	id ID #REQUIRED
+>
+<!ELEMENT research (costs?,time?,dependencies?)>
+<!ATTLIST research
+	id ID #REQUIRED
+>
+<!ELEMENT robot (costs?,time?,dependencies?)>
+<!ATTLIST robot
+	id ID #REQUIRED
+>
+<!ELEMENT ship (costs?,time?,dependencies?,capacity?,strength?,speed?,types?)>
+<!ATTLIST ship
+	id ID #REQUIRED
+>
+<!ELEMENT defence (costs?,time?,dependencies?,strength?)>
+<!ATTLIST defence
+	id ID #REQUIRED
+>
+
+<!ELEMENT costs ( carbon?,aluminium?,wolfram?,radium? )>
+<!ELEMENT production ( carbon?,aluminium?,wolfram?,radium?,tritium?,power? )>
+<!ELEMENT size ( #PCDATA )>
+<!ELEMENT time ( #PCDATA )>
+<!ELEMENT dependencies ( dependency* )>
+<!ELEMENT capacity ( ressources,robots )>
+<!ELEMENT strength ( attack?,defence? )>
+<!ELEMENT speed ( #PCDATA )>
+<!ELEMENT types ( colonisation?, gathering?, attack?, transport?, espionage?, stationing? )>
+
+<!ELEMENT carbon ( #PCDATA )>
+<!ELEMENT aluminium ( #PCDATA )>
+<!ELEMENT wolfram ( #PCDATA )>
+<!ELEMENT radium ( #PCDATA )>
+<!ELEMENT tritium ( #PCDATA )>
+<!ELEMENT power ( #PCDATA )>
+
+<!ELEMENT dependency EMPTY>
+<!ATTLIST dependency
+	id IDREF #REQUIRED
+	level CDATA #REQUIRED
+>
+
+<!ELEMENT ressources ( #PCDATA )>
+<!ELEMENT robots ( #PCDATA )>
+
+<!ELEMENT attack ( #PCDATA )>
+<!ELEMENT defence ( #PCDATA )>
+
+<!ELEMENT colonisation EMPTY>
+<!ELEMENT gathering EMPTY>
+<!ELEMENT attack EMPTY>
+<!ELEMENT transport EMPTY>
+<!ELEMENT espionage EMPTY>
+<!ELEMENT stationing EMPTY>

@@ -7,6 +7,6 @@ package de.cdauth.sua.suaserv;
  * @version 2.0.0
 */
 
-abstract class Dataset extends Instantiation
+public abstract class Dataset extends Instantiation
 {
 }

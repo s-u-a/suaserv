@@ -1,0 +1,963 @@
+<?xml version="1.0"?>
+<!DOCTYPE items SYSTEM "items.dtd">
+<items>
+	<building id="B0">
+		<costs>
+			<carbon>40</carbon>
+			<aluminium>15</aluminium>
+			<wolfram>0</wolfram>
+			<radium>0</radium>
+		</costs>
+		<time>145</time>
+		<production>
+			<carbon>40</carbon>
+			<aluminium>0</aluminium>
+			<wolfram>0</wolfram>
+			<radium>0</radium>
+			<tritium>0</tritium>
+			<power>-5</power>
+		</production>
+	</building>
+	<building id="B1">
+		<costs>
+			<carbon>63</carbon>
+			<aluminium>20</aluminium>
+			<wolfram>0</wolfram>
+			<radium>0</radium>
+		</costs>
+		<time>205</time>
+		<production>
+			<carbon>0</carbon>
+			<aluminium>26</aluminium>
+			<wolfram>0</wolfram>
+			<radium>0</radium>
+			<tritium>0</tritium>
+			<power>-7</power>
+		</production>
+	</building>
+	<building id="B2">
+		<costs>
+			<carbon>120</carbon>
+			<aluminium>50</aluminium>
+			<wolfram>0</wolfram>
+			<radium>0</radium>
+		</costs>
+		<time>358</time>
+		<dependencies>
+			<dependency id="B0" level="3" />
+			<dependency id="B1" level="2" />
+		</dependencies>
+		<production>
+			<carbon>0</carbon>
+			<aluminium>0</aluminium>
+			<wolfram>16</wolfram>
+			<radium>0</radium>
+			<tritium>0</tritium>
+			<power>-10</power>
+		</production>
+	</building>
+	<building id="B3">
+		<costs>
+			<carbon>250</carbon>
+			<aluminium>130</aluminium>
+			<wolfram>0</wolfram>
+			<radium>0</radium>
+		</costs>
+		<time>468</time>
+		<dependencies>
+			<dependency id="B0" level="6" />
+			<dependency id="B1" level="5" />
+			<dependency id="B2" level="3" />
+		</dependencies>
+		<production>
+			<carbon>0</carbon>
+			<aluminium>0</aluminium>
+			<wolfram>0</wolfram>
+			<radium>5</radium>
+			<tritium>0</tritium>
+			<power>-40</power>
+		</production>
+	</building>
+	<building id="B4">
+		<costs>
+			<carbon>300</carbon>
+			<aluminium>170</aluminium>
+			<wolfram>120</wolfram>
+			<radium>0</radium>
+		</costs>
+		<time>605</time>
+		<dependencies>
+			<dependency id="B2" level="1" />
+			<dependency id="F0" level="1" />
+		</dependencies>
+		<production>
+			<carbon>0</carbon>
+			<aluminium>0</aluminium>
+			<wolfram>0</wolfram>
+			<radium>0</radium>
+			<tritium>4</tritium>
+			<power>-35</power>
+		</production>
+	</building>
+	<building id="B5">
+		<costs>
+			<carbon>150</carbon>
+			<aluminium>70</aluminium>
+			<wolfram>0</wolfram>
+			<radium>0</radium>
+		</costs>
+		<time>155</time>
+		<production>
+			<carbon>0</carbon>
+			<aluminium>0</aluminium>
+			<wolfram>0</wolfram>
+			<radium>0</radium>
+			<tritium>0</tritium>
+			<power>62</power>
+		</production>
+	</building>
+	<building id="B6">
+		<costs>
+			<carbon>1000</carbon>
+			<aluminium>500</aluminium>
+			<wolfram>300</wolfram>
+			<radium>0</radium>
+		</costs>
+		<time>1340</time>
+		<dependencies>
+			<dependency id="F3" level="3" />
+		</dependencies>
+		<production>
+			<carbon>0</carbon>
+			<aluminium>0</aluminium>
+			<wolfram>0</wolfram>
+			<radium>0</radium>
+			<tritium>0</tritium>
+			<power>97</power>
+		</production>
+	</building>
+	<building id="B7">
+		<costs>
+			<carbon>5000000</carbon>
+			<aluminium>5000000</aluminium>
+			<wolfram>5000000</wolfram>
+			<radium>5000000</radium>
+		</costs>
+		<time>542230</time>
+		<dependencies>
+			<dependency id="B2" level="30" />
+			<dependency id="F3" level="15" />
+			<dependency id="F9" level="1" />
+		</dependencies>
+		<production>
+			<carbon>0</carbon>
+			<aluminium>60000</aluminium>
+			<wolfram>40000</wolfram>
+			<radium>15000</radium>
+			<tritium>0</tritium>
+			<power>10000</power>
+		</production>
+	</building>
+	<building id="B8">
+		<costs>
+			<carbon>100</carbon>
+			<aluminium>80</aluminium>
+			<wolfram>60</wolfram>
+			<radium>50</radium>
+		</costs>
+		<time>745</time>
+		<dependencies>
+			<dependency id="B2" level="5" />
+			<dependency id="B3" level="2" />
+		</dependencies>
+		<production>
+			<carbon>0</carbon>
+			<aluminium>0</aluminium>
+			<wolfram>0</wolfram>
+			<radium>0</radium>
+			<tritium>0</tritium>
+			<power>0</power>
+		</production>
+	</building>
+	<building id="B9">
+		<costs>
+			<carbon>60</carbon>
+			<aluminium>50</aluminium>
+			<wolfram>20</wolfram>
+			<radium>10</radium>
+		</costs>
+		<time>625</time>
+		<dependencies>
+			<dependency id="B8" level="2" />
+		</dependencies>
+		<production>
+			<carbon>0</carbon>
+			<aluminium>0</aluminium>
+			<wolfram>0</wolfram>
+			<radium>0</radium>
+			<tritium>0</tritium>
+			<power>0</power>
+		</production>
+	</building>
+	<building id="B10">
+		<costs>
+			<carbon>80</carbon>
+			<aluminium>70</aluminium>
+			<wolfram>60</wolfram>
+			<radium>20</radium>
+		</costs>
+		<time>863</time>
+		<dependencies>
+			<dependency id="B4" level="2" />
+			<dependency id="F0" level="1" />
+			<dependency id="F6" level="1" />
+		</dependencies>
+		<production>
+			<carbon>0</carbon>
+			<aluminium>0</aluminium>
+			<wolfram>0</wolfram>
+			<radium>0</radium>
+			<tritium>0</tritium>
+			<power>0</power>
+		</production>
+	</building>
+
+	<research id="F0">
+		<costs>
+			<carbon>600</carbon>
+			<aluminium>500</aluminium>
+			<wolfram>0</wolfram>
+			<radium>100</radium>
+		</costs>
+		<time>665</time>
+		<dependencies>
+			<dependency id="B8" level="1" />
+		</dependencies>
+	</research>
+	<research id="F1">
+		<costs>
+			<carbon>1250</carbon>
+			<aluminium>1000</aluminium>
+			<wolfram>500</wolfram>
+			<radium>333</radium>
+		</costs>
+		<time>1133</time>
+		<dependencies>
+			<dependency id="B8" level="1" />
+			<dependency id="B10" level="2" />
+			<dependency id="F0" level="1" />
+		</dependencies>
+	</research>
+	<research id="F2">
+		<costs>
+			<carbon>2000</carbon>
+			<aluminium>1000</aluminium>
+			<wolfram>120</wolfram>
+			<radium>55</radium>
+		</costs>
+		<time>545</time>
+		<dependencies>
+			<dependency id="B8" level="2" />
+			<dependency id="B9" level="1" />
+		</dependencies>
+	</research>
+	<research id="F3">
+		<costs>
+			<carbon>1000</carbon>
+			<aluminium>500</aluminium>
+			<wolfram>350</wolfram>
+			<radium>0</radium>
+		</costs>
+		<time>320</time>
+		<dependencies>
+			<dependency id="B5" level="3" />
+			<dependency id="B8" level="2" />
+		</dependencies>
+	</research>
+	<research id="F4">
+		<costs>
+			<carbon>2400</carbon>
+			<aluminium>1255</aluminium>
+			<wolfram>1000</wolfram>
+			<radium>233</radium>
+		</costs>
+		<time>500</time>
+		<dependencies>
+			<dependency id="B8" level="2" />
+			<dependency id="B10" level="3" />
+			<dependency id="F0" level="2" />
+		</dependencies>
+	</research>
+	<research id="F5">
+		<costs>
+			<carbon>2300</carbon>
+			<aluminium>1144</aluminium>
+			<wolfram>700</wolfram>
+			<radium>300</radium>
+		</costs>
+		<time>513</time>
+		<dependencies>
+			<dependency id="B8" level="2" />
+			<dependency id="B10" level="3" />
+			<dependency id="F0" level="2" />
+		</dependencies>
+	</research>
+	<research id="F10">
+		<costs>
+			<carbon>10000</carbon>
+			<aluminium>5000</aluminium>
+			<wolfram>2500</wolfram>
+			<radium>3000</radium>
+		</costs>
+		<time>20733</time>
+		<dependencies>
+			<dependency id="B8" level="10" />
+			<dependency id="B10" level="5" />
+			<dependency id="F5" level="3" />
+		</dependencies>
+	</research>
+	<research id="F6">
+		<costs>
+			<carbon>2000</carbon>
+			<aluminium>1000</aluminium>
+			<wolfram>500</wolfram>
+			<radium>222</radium>
+		</costs>
+		<time>303</time>
+		<dependencies>
+			<dependency id="B8" level="3" />
+			<dependency id="F3" level="2" />
+		</dependencies>
+	</research>
+	<research id="F7">
+		<costs>
+			<carbon>10000</carbon>
+			<aluminium>3333</aluminium>
+			<wolfram>1000</wolfram>
+			<radium>600</radium>
+		</costs>
+		<time>913</time>
+		<dependencies>
+			<dependency id="B8" level="7" />
+			<dependency id="F3" level="5" />
+		</dependencies>
+	</research>
+	<research id="F8">
+		<costs>
+			<carbon>1508549</carbon>
+			<aluminium>1547298</aluminium>
+			<wolfram>663875</wolfram>
+			<radium>503226</radium>
+		</costs>
+		<time>172832</time>
+		<dependencies>
+			<dependency id="B8" level="20" />
+			<dependency id="F3" level="12" />
+		</dependencies>
+	</research>
+	<research id="F9">
+		<costs>
+			<carbon>415140368</carbon>
+			<aluminium>247140344</aluminium>
+			<wolfram>125590584</wolfram>
+			<radium>81514736</radium>
+		</costs>
+		<time>604800</time>
+		<dependencies>
+			<dependency id="B8" level="30" />
+			<dependency id="F2" level="20" />
+		</dependencies>
+	</research>
+	<research id="F11">
+		<costs>
+			<carbon>200000</carbon>
+			<aluminium>130000</aluminium>
+			<wolfram>100000</wolfram>
+			<radium>75000</radium>
+		</costs>
+		<time>24015</time>
+		<dependencies>
+			<dependency id="B8" level="20" />
+			<dependency id="B10" level="15" />
+			<dependency id="F0" level="5" />
+			<dependency id="F2" level="6" />
+		</dependencies>
+	</research>
+
+	<robot id="R01">
+		<costs>
+			<carbon>51893</carbon>
+			<aluminium>43095</aluminium>
+			<wolfram>32933</wolfram>
+			<radium>19463</radium>
+		</costs>
+		<time>51365</time>
+		<dependencies>
+			<dependency id="B9" level="2" />
+			<dependency id="F2" level="1" />
+		</dependencies>
+	</robot>
+	<robot id="R02">
+		<costs>
+			<carbon>76329</carbon>
+			<aluminium>58921</aluminium>
+			<wolfram>49892</wolfram>
+			<radium>28979</radium>
+		</costs>
+		<time>72985</time>
+		<dependencies>
+			<dependency id="B9" level="5" />
+			<dependency id="F2" level="2" />
+		</dependencies>
+	</robot>
+	<robot id="R03">
+		<costs>
+			<carbon>72984</carbon>
+			<aluminium>75893</aluminium>
+			<wolfram>53876</wolfram>
+			<radium>30532</radium>
+		</costs>
+		<time>80493</time>
+		<dependencies>
+			<dependency id="B9" level="7" />
+			<dependency id="F2" level="5" />
+		</dependencies>
+	</robot>
+	<robot id="R04">
+		<costs>
+			<carbon>75823</carbon>
+			<aluminium>65239</aluminium>
+			<wolfram>73189</wolfram>
+			<radium>34892</radium>
+		</costs>
+		<time>92893</time>
+		<dependencies>
+			<dependency id="B9" level="10" />
+			<dependency id="F2" level="7" />
+		</dependencies>
+	</robot>
+	<robot id="R05">
+		<costs>
+			<carbon>79894</carbon>
+			<aluminium>69093</aluminium>
+			<wolfram>58398</wolfram>
+			<radium>55892</radium>
+		</costs>
+		<time>105842</time>
+		<dependencies>
+			<dependency id="B9" level="14" />
+			<dependency id="F2" level="10" />
+		</dependencies>
+	</robot>
+	<robot id="R06">
+		<costs>
+			<carbon>102985</carbon>
+			<aluminium>90439</aluminium>
+			<wolfram>84902</wolfram>
+			<radium>182232</radium>
+		</costs>
+		<time>60194</time>
+		<dependencies>
+			<dependency id="B9" level="20" />
+			<dependency id="F2" level="17" />
+			<dependency id="F3" level="15" />
+		</dependencies>
+	</robot>
+
+	<ship id="S0">
+		<costs>
+			<carbon>10000</carbon>
+			<aluminium>7500</aluminium>
+			<wolfram>7500</wolfram>
+			<radium>0</radium>
+		</costs>
+		<time>3125</time>
+		<dependencies>
+			<dependency id="B10" level="2" />
+			<dependency id="F6" level="2" />
+		</dependencies>
+		<capacity>
+			<ressources>7500</ressources>
+			<robots>0</robots>
+		</capacity>
+		<strength>
+			<attack>0</attack>
+			<defence>300</defence>
+		</strength>
+		<speed>950</speed>
+	</ship>
+	<ship id="S1">
+		<costs>
+			<carbon>30000</carbon>
+			<aluminium>20000</aluminium>
+			<wolfram>20000</wolfram>
+			<radium>0</radium>
+		</costs>
+		<time>4878</time>
+		<dependencies>
+			<dependency id="B10" level="6" />
+			<dependency id="F6" level="5" />
+		</dependencies>
+		<capacity>
+			<ressources>50000</ressources>
+			<robots>0</robots>
+		</capacity>
+		<strength>
+			<attack>0</attack>
+			<defence>500</defence>
+		</strength>
+		<speed>1200</speed>
+	</ship>
+	<ship id="S2">
+		<costs>
+			<carbon>90000</carbon>
+			<aluminium>60000</aluminium>
+			<wolfram>55000</wolfram>
+			<radium>0</radium>
+		</costs>
+		<time>6800</time>
+		<dependencies>
+			<dependency id="B10" level="11" />
+			<dependency id="F6" level="10" />
+		</dependencies>
+		<capacity>
+			<ressources>180000</ressources>
+			<robots>3</robots>
+		</capacity>
+		<strength>
+			<attack>0</attack>
+			<defence>650</defence>
+		</strength>
+		<speed>1500</speed>
+	</ship>
+	<ship id="S3">
+		<costs>
+			<carbon>30000</carbon>
+			<aluminium>20000</aluminium>
+			<wolfram>15000</wolfram>
+			<radium>5000</radium>
+		</costs>
+		<time>6745</time>
+		<dependencies>
+			<dependency id="B10" level="6" />
+			<dependency id="F5" level="2" />
+			<dependency id="F6" level="5" />
+		</dependencies>
+		<capacity>
+			<ressources>35000</ressources>
+			<robots>0</robots>
+		</capacity>
+		<strength>
+			<attack>0</attack>
+			<defence>600</defence>
+		</strength>
+		<speed>650</speed>
+	</ship>
+	<ship id="S5">
+		<costs>
+			<carbon>0</carbon>
+			<aluminium>7500</aluminium>
+			<wolfram>5000</wolfram>
+			<radium>0</radium>
+		</costs>
+		<time>1245</time>
+		<dependencies>
+			<dependency id="B10" level="3" />
+			<dependency id="F1" level="3" />
+			<dependency id="F6" level="3" />
+		</dependencies>
+		<capacity>
+			<ressources>0</ressources>
+			<robots>0</robots>
+		</capacity>
+		<strength>
+			<attack>0</attack>
+			<defence>200</defence>
+		</strength>
+		<speed>600000</speed>
+	</ship>
+	<ship id="S6">
+		<costs>
+			<carbon>75000</carbon>
+			<aluminium>50000</aluminium>
+			<wolfram>22000</wolfram>
+			<radium>14000</radium>
+		</costs>
+		<time>7250</time>
+		<dependencies>
+			<dependency id="B10" level="6" />
+			<dependency id="F6" level="5" />
+		</dependencies>
+		<capacity>
+			<ressources>0</ressources>
+			<robots>0</robots>
+		</capacity>
+		<strength>
+			<attack>0</attack>
+			<defence>2500</defence>
+		</strength>
+		<speed>500</speed>
+	</ship>
+	<ship id="S7">
+		<costs>
+			<carbon>12500</carbon>
+			<aluminium>9000</aluminium>
+			<wolfram>3000</wolfram>
+			<radium>1200</radium>
+		</costs>
+		<time>3655</time>
+		<dependencies>
+			<dependency id="B10" level="5" />
+			<dependency id="F4" level="1" />
+			<dependency id="F6" level="2" />
+		</dependencies>
+		<capacity>
+			<ressources>500</ressources>
+			<robots>0</robots>
+		</capacity>
+		<strength>
+			<attack>100</attack>
+			<defence>350</defence>
+		</strength>
+		<speed>850</speed>
+	</ship>
+	<ship id="S8">
+		<costs>
+			<carbon>18000</carbon>
+			<aluminium>13000</aluminium>
+			<wolfram>6500</wolfram>
+			<radium>3000</radium>
+		</costs>
+		<time>5485</time>
+		<dependencies>
+			<dependency id="B10" level="6" />
+			<dependency id="F4" level="2" />
+			<dependency id="F6" level="3" />
+		</dependencies>
+		<capacity>
+			<ressources>750</ressources>
+			<robots>0</robots>
+		</capacity>
+		<strength>
+			<attack>140</attack>
+			<defence>450</defence>
+		</strength>
+		<speed>600</speed>
+	</ship>
+	<ship id="S9">
+		<costs>
+			<carbon>30000</carbon>
+			<aluminium>20000</aluminium>
+			<wolfram>12500</wolfram>
+			<radium>6525</radium>
+		</costs>
+		<time>7135</time>
+		<dependencies>
+			<dependency id="B10" level="7" />
+			<dependency id="F4" level="4" />
+			<dependency id="F6" level="4" />
+		</dependencies>
+		<capacity>
+			<ressources>1000</ressources>
+			<robots>0</robots>
+		</capacity>
+		<strength>
+			<attack>280</attack>
+			<defence>1000</defence>
+		</strength>
+		<speed>700</speed>
+	</ship>
+	<ship id="S10">
+		<costs>
+			<carbon>24000</carbon>
+			<aluminium>16000</aluminium>
+			<wolfram>10000</wolfram>
+			<radium>5500</radium>
+		</costs>
+		<time>5298</time>
+		<dependencies>
+			<dependency id="B10" level="6" />
+			<dependency id="F4" level="3" />
+			<dependency id="F6" level="3" />
+		</dependencies>
+		<capacity>
+			<ressources>1500</ressources>
+			<robots>0</robots>
+		</capacity>
+		<strength>
+			<attack>230</attack>
+			<defence>1000</defence>
+		</strength>
+		<speed>550</speed>
+	</ship>
+	<ship id="S11">
+		<costs>
+			<carbon>31000</carbon>
+			<aluminium>21000</aluminium>
+			<wolfram>13000</wolfram>
+			<radium>7500</radium>
+		</costs>
+		<time>7268</time>
+		<dependencies>
+			<dependency id="B10" level="8" />
+			<dependency id="F4" level="5" />
+			<dependency id="F6" level="4" />
+		</dependencies>
+		<capacity>
+			<ressources>2500</ressources>
+			<robots>0</robots>
+		</capacity>
+		<strength>
+			<attack>300</attack>
+			<defence>1300</defence>
+		</strength>
+		<speed>470</speed>
+	</ship>
+	<ship id="S12">
+		<costs>
+			<carbon>41000</carbon>
+			<aluminium>28000</aluminium>
+			<wolfram>18000</wolfram>
+			<radium>10000</radium>
+		</costs>
+		<time>8625</time>
+		<dependencies>
+			<dependency id="B10" level="10" />
+			<dependency id="F4" level="7" />
+			<dependency id="F6" level="5" />
+		</dependencies>
+		<capacity>
+			<ressources>3500</ressources>
+			<robots>0</robots>
+		</capacity>
+		<strength>
+			<attack>350</attack>
+			<defence>1700</defence>
+		</strength>
+		<speed>420</speed>
+	</ship>
+	<ship id="S13">
+		<costs>
+			<carbon>45000</carbon>
+			<aluminium>30000</aluminium>
+			<wolfram>20000</wolfram>
+			<radium>12000</radium>
+		</costs>
+		<time>7565</time>
+		<dependencies>
+			<dependency id="B10" level="14" />
+			<dependency id="F4" level="9" />
+			<dependency id="F7" level="3" />
+		</dependencies>
+		<capacity>
+			<ressources>2000</ressources>
+			<robots>0</robots>
+		</capacity>
+		<strength>
+			<attack>430</attack>
+			<defence>1600</defence>
+		</strength>
+		<speed>170</speed>
+	</ship>
+	<ship id="S14">
+		<costs>
+			<carbon>60000</carbon>
+			<aluminium>40000</aluminium>
+			<wolfram>28000</wolfram>
+			<radium>16000</radium>
+		</costs>
+		<time>9095</time>
+		<dependencies>
+			<dependency id="B10" level="17" />
+			<dependency id="F4" level="10" />
+			<dependency id="F7" level="5" />
+		</dependencies>
+		<capacity>
+			<ressources>3000</ressources>
+			<robots>0</robots>
+		</capacity>
+		<strength>
+			<attack>550</attack>
+			<defence>2150</defence>
+		</strength>
+		<speed>110</speed>
+	</ship>
+	<ship id="S15">
+		<costs>
+			<carbon>87000</carbon>
+			<aluminium>60000</aluminium>
+			<wolfram>40000</wolfram>
+			<radium>24000</radium>
+		</costs>
+		<time>14498</time>
+		<dependencies>
+			<dependency id="B10" level="20" />
+			<dependency id="F4" level="12" />
+			<dependency id="F7" level="8" />
+		</dependencies>
+		<capacity>
+			<ressources>5000</ressources>
+			<robots>0</robots>
+		</capacity>
+		<strength>
+			<attack>800</attack>
+			<defence>3200</defence>
+		</strength>
+		<speed>85</speed>
+	</ship>
+	<ship id="S16">
+		<costs>
+			<carbon>500000</carbon>
+			<aluminium>350000</aluminium>
+			<wolfram>250000</wolfram>
+			<radium>140000</radium>
+		</costs>
+		<time>36875</time>
+		<dependencies>
+			<dependency id="B10" level="30" />
+			<dependency id="F4" level="15" />
+			<dependency id="F5" level="10" />
+			<dependency id="F8" level="3" />
+		</dependencies>
+		<capacity>
+			<ressources>10000</ressources>
+			<robots>0</robots>
+		</capacity>
+		<strength>
+			<attack>2500</attack>
+			<defence>11000</defence>
+		</strength>
+		<speed>30</speed>
+	</ship>
+
+	<defence id="V0">
+		<costs>
+			<carbon>12500</carbon>
+			<aluminium>9000</aluminium>
+			<wolfram>3000</wolfram>
+			<radium>1200</radium>
+		</costs>
+		<time>4575</time>
+		<dependencies>
+			<dependency id="B10" level="3" />
+			<dependency id="F4" level="1" />
+			<dependency id="F5" level="2" />
+		</dependencies>
+		<strength>
+			<attack>100</attack>
+			<defence>400</defence>
+		</strength>
+	</defence>
+	<defence id="V1">
+		<costs>
+			<carbon>18000</carbon>
+			<aluminium>12500</aluminium>
+			<wolfram>6000</wolfram>
+			<radium>3000</radium>
+		</costs>
+		<time>4813</time>
+		<dependencies>
+			<dependency id="B10" level="4" />
+			<dependency id="F4" level="2" />
+			<dependency id="F5" level="3" />
+		</dependencies>
+		<strength>
+			<attack>175</attack>
+			<defence>600</defence>
+		</strength>
+	</defence>
+	<defence id="V2">
+		<costs>
+			<carbon>50000</carbon>
+			<aluminium>45000</aluminium>
+			<wolfram>45000</wolfram>
+			<radium>20000</radium>
+		</costs>
+		<time>5435</time>
+		<dependencies>
+			<dependency id="B10" level="7" />
+			<dependency id="F4" level="5" />
+			<dependency id="F5" level="7" />
+			<dependency id="F6" level="3" />
+		</dependencies>
+		<strength>
+			<attack>400</attack>
+			<defence>950</defence>
+		</strength>
+	</defence>
+	<defence id="V6">
+		<costs>
+			<carbon>100000</carbon>
+			<aluminium>70000</aluminium>
+			<wolfram>50000</wolfram>
+			<radium>25000</radium>
+		</costs>
+		<time>6000</time>
+		<dependencies>
+			<dependency id="B10" level="8" />
+			<dependency id="F4" level="7" />
+			<dependency id="F5" level="9" />
+		</dependencies>
+		<strength>
+			<attack>650</attack>
+			<defence>1200</defence>
+		</strength>
+	</defence>
+	<defence id="V3">
+		<costs>
+			<carbon>250000</carbon>
+			<aluminium>175000</aluminium>
+			<wolfram>100000</wolfram>
+			<radium>50000</radium>
+		</costs>
+		<time>7363</time>
+		<dependencies>
+			<dependency id="B10" level="18" />
+			<dependency id="F4" level="13" />
+			<dependency id="F5" level="15" />
+			<dependency id="F6" level="10" />
+		</dependencies>
+		<strength>
+			<attack>1000</attack>
+			<defence>2000</defence>
+		</strength>
+	</defence>
+	<defence id="V4">
+		<costs>
+			<carbon>375000</carbon>
+			<aluminium>300000</aluminium>
+			<wolfram>200000</wolfram>
+			<radium>300000</radium>
+		</costs>
+		<time>8455</time>
+		<dependencies>
+			<dependency id="B10" level="22" />
+			<dependency id="F4" level="15" />
+			<dependency id="F5" level="17" />
+			<dependency id="F7" level="5" />
+		</dependencies>
+		<strength>
+			<attack>1500</attack>
+			<defence>3500</defence>
+		</strength>
+	</defence>
+	<defence id="V5">
+		<costs>
+			<carbon>1000000</carbon>
+			<aluminium>750000</aluminium>
+			<wolfram>600000</wolfram>
+			<radium>400000</radium>
+		</costs>
+		<time>10043</time>
+		<dependencies>
+			<dependency id="B10" level="25" />
+			<dependency id="F4" level="20" />
+			<dependency id="F5" level="19" />
+			<dependency id="F3" level="12" />
+		</dependencies>
+		<strength>
+			<attack>2500</attack>
+			<defence>9000</defence>
+		</strength>
+	</defence>
+</items>

@@ -1,5 +1,9 @@
 package de.cdauth.sua.suaserv;
 
+import java.util.Date;
+
+import java.text.SimpleDateFormat;
+
 /**
  * This static class prints any log file information to the right place.
  * @author Candid Dauth
@@ -16,13 +20,13 @@ public class Logger
 
 	public static void fatal(String a_message)
 	{
-		System.err.println(a_message);
+		System.err.println(timePrefix() + a_message);
 		System.exit(1);
 	}
 
 	public static void fatal(String a_message, Throwable a_exception)
 	{
-		System.err.println(a_message + ": " + a_exception.getMessage());
+		System.err.println(timePrefix() + a_message + ": " + a_exception.getMessage());
 		if(Options.getVerbose())
 			a_exception.printStackTrace(System.err);
 		System.exit(1);
@@ -36,7 +40,7 @@ public class Logger
 
 	public static void error(String a_message)
 	{
-		System.err.println(a_message);
+		System.err.println(timePrefix() + a_message);
 	}
 
 	public static void error(String a_message, Throwable a_exception)
@@ -55,13 +59,13 @@ public class Logger
 	public static void warning(String a_message)
 	{
 		if(!Options.getQuiet())
-			System.err.println(a_message);
+			System.err.println(timePrefix() + a_message);
 	}
 
 	public static void warning(String a_message, Throwable a_exception)
 	{
 		warning(a_message + ": " + a_exception.getMessage());
-		if(Options.getVerbose())
+		if(!Options.getQuiet() && Options.getVerbose())
 			a_exception.printStackTrace(System.err);
 	}
 
@@ -74,7 +78,7 @@ public class Logger
 	public static void debug(String a_message)
 	{
 		if(Options.getVerbose())
-			System.err.println(a_message);
+			System.err.println(timePrefix() + a_message);
 	}
 
 	public static void debug(String a_message, Throwable a_exception)
@@ -82,5 +86,20 @@ public class Logger
 		debug(a_message + ": " + a_exception.getMessage());
 		if(Options.getVerbose())
 			a_exception.printStackTrace(System.err);
+	}
+
+	/**
+	 * Creates a prefix string for log output that contains
+	 * the time.
+	 * @return "YYYY-MM-DDTHH:MM:SS -- "
+	 * @author Candid Dauth
+	 * @version 2.0.0
+	*/
+
+	protected static String timePrefix()
+	{
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		String ret = format.format(new Date()) + " -- ";
+		return ret;
 	}
 }

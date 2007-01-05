@@ -9,15 +9,15 @@ import java.util.Hashtable;
  * @version 2.0.0
 */
 
-abstract class Instantiation
+public abstract class Instantiation
 {
-	protected static Hashtable<Class,Hashtable<String,Object>> sm_instances = null;
+	protected static Hashtable<Class,Hashtable<String,Instantiation>> sm_instances = null;
 	protected String m_id = null;
 	private Hashtable m_cache = new Hashtable();
 
 	static
 	{
-		sm_instances = new Hashtable<Class,Hashtable<String,Object>>();
+		sm_instances = new Hashtable<Class,Hashtable<String,Instantiation>>();
 	}
 
 	public String getID()
@@ -34,10 +34,10 @@ abstract class Instantiation
 	 * @version 2.0.0
 	*/
 
-	protected static Object getInstance(Class a_type, String a_id)
+	protected static Instantiation getInstance(Class a_type, String a_id)
 	{
 		if(!sm_instances.containsKey(a_type)) return null;
-		Hashtable type = sm_instances.get(a_type);
+		Hashtable<String,Instantiation> type = sm_instances.get(a_type);
 		if(!type.containsKey(a_id)) return null;
 		return type.get(a_id);
 	}
@@ -48,11 +48,11 @@ abstract class Instantiation
 	 * @version 2.0.0
 	*/
 
-	protected static void addInstance(Class a_type, String a_id, Object a_instance)
+	protected static void addInstance(Class a_type, String a_id, Instantiation a_instance)
 	{
 		if(!sm_instances.containsKey(a_type))
-			sm_instances.put(a_type, new Hashtable<String,Object>());
-		Hashtable<String,Object> type = sm_instances.get(a_type);
+			sm_instances.put(a_type, new Hashtable<String,Instantiation>());
+		Hashtable<String,Instantiation> type = sm_instances.get(a_type);
 		type.put(a_id, a_instance);
 	}
 

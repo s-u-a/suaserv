@@ -1,9 +1,8 @@
 package de.cdauth.sua.suaserv;
 
-import psk.cmdline.ApplicationSettings;
-import psk.cmdline.BooleanToken;
-import psk.cmdline.StringToken;
-import psk.cmdline.TokenOptions;
+import de.cdauth.cmdargs.Argument;
+import de.cdauth.cmdargs.ArgumentParser;
+import de.cdauth.cmdargs.ArgumentParserException;
 
 /**
  * This static class manages all passed command line options.
@@ -11,22 +10,46 @@ import psk.cmdline.TokenOptions;
  * @version 2.0.0
 */
 
-class Options
+public class Options
 {
-	static protected ApplicationSettings sm_arguments = new ApplicationSettings();
-	static protected BooleanToken sm_quiet_token = new BooleanToken("q", "Don't print warnings", "QUIET", TokenOptions.optSwitch, false);
-	static protected BooleanToken sm_verbose_token = new BooleanToken("v", "Print debug output", "DEBUG", TokenOptions.optSwitch, false);
-	static protected StringToken sm_config_token = new StringToken("c", "The suaserv configuration file", "", 0, "suaserv.properties");
-	static protected StringToken sm_defaults_token = new StringToken("B", "The defaults configuration file", "", 0, "/etc/suaserv.defaults");
-	static protected StringToken sm_database_token = new StringToken("d", "The database directory", "SUASERV_DATABASE", TokenOptions.optRequired, null);
+	static protected ArgumentParser sm_arguments = null;
+	static protected Argument sm_quiet_token = null;
+	static protected Argument sm_verbose_token = null;
+	static protected Argument sm_config_token = null;
+	static protected Argument sm_defaults_token = null;
+	static protected Argument sm_database_token = null;
 
 	static
 	{
-		sm_arguments.addToken(sm_quiet_token);
-		sm_arguments.addToken(sm_verbose_token);
-		sm_arguments.addToken(sm_config_token);
-		sm_arguments.addToken(sm_defaults_token);
-		sm_arguments.addToken(sm_database_token);
+		try
+		{
+			sm_arguments = new ArgumentParser("suaserv");
+
+			sm_quiet_token = new Argument('q', "quiet");
+			sm_quiet_token.setDescription("Don't print warnings");
+			sm_arguments.addArgument(sm_quiet_token);
+
+			sm_verbose_token = new Argument('v', "verbose");
+			sm_verbose_token.setDescription("Print debug output");
+			sm_arguments.addArgument(sm_verbose_token);
+
+			sm_config_token = new Argument('c', "config");
+			sm_config_token.setDescription("The suaserv configuration file");
+			sm_config_token.setParameter(Argument.PARAMETER_REQUIRED);
+			sm_arguments.addArgument(sm_config_token);
+
+			sm_defaults_token = new Argument('B', "default-config");
+			sm_defaults_token.setDescription("The defaults configuration file");
+			sm_defaults_token.setParameter(Argument.PARAMETER_REQUIRED);
+			sm_arguments.addArgument(sm_defaults_token);
+
+			sm_database_token = new Argument('d', "database");
+			sm_database_token.setDescription("The database directory");
+			sm_database_token.setParameter(Argument.PARAMETER_REQUIRED);
+			sm_database_token.setRequired(true);
+			sm_arguments.addArgument(sm_database_token);
+		}
+		catch(ArgumentParserException e){}
 	}
 
 	static protected boolean sm_quiet = false;
@@ -44,13 +67,15 @@ class Options
 	public static void load(String[] a_args)
 		throws Exception
 	{
-		sm_arguments.parseArgs(a_args);
+		sm_arguments.parseArguments(a_args);
 
-		sm_quiet = sm_quiet_token.getValue();
-		sm_verbose = sm_verbose_token.getValue();
-		sm_config = sm_config_token.getValue();
-		sm_defaults = sm_defaults_token.getValue();
-		sm_database = sm_database_token.getValue();
+		sm_quiet = sm_quiet_token.set() > 0;
+		sm_verbose = sm_verbose_token.set() > 0;
+		sm_config = sm_config_token.parameter();
+		if(sm_config == null) sm_config = "suaserv.properties";
+		sm_defaults = sm_defaults_token.parameter();
+		if(sm_defaults == null) sm_defaults = "/etc/suaserv/suaserv.defaults.xml";
+		sm_database = sm_database_token.parameter();
 	}
 
 	public static boolean getQuiet()
