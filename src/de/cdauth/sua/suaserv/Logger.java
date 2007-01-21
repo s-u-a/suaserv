@@ -20,16 +20,16 @@ public class Logger
 
 	public static void fatal(String a_message)
 	{
-		System.err.println(timePrefix() + a_message);
-		System.exit(1);
+		java.lang.System.err.println(timePrefix() + a_message);
+		java.lang.System.exit(1);
 	}
 
 	public static void fatal(String a_message, Throwable a_exception)
 	{
-		System.err.println(timePrefix() + a_message + ": " + a_exception.getMessage());
+		java.lang.System.err.println(timePrefix() + a_message + ": " + a_exception.getMessage());
 		if(Options.getVerbose())
-			a_exception.printStackTrace(System.err);
-		System.exit(1);
+			a_exception.printStackTrace(java.lang.System.err);
+		java.lang.System.exit(1);
 	}
 
 	/**
@@ -40,14 +40,14 @@ public class Logger
 
 	public static void error(String a_message)
 	{
-		System.err.println(timePrefix() + a_message);
+		java.lang.System.err.println(timePrefix() + a_message);
 	}
 
 	public static void error(String a_message, Throwable a_exception)
 	{
 		error(a_message + ": " + a_exception.getMessage());
 		if(Options.getVerbose())
-			a_exception.printStackTrace(System.err);
+			a_exception.printStackTrace(java.lang.System.err);
 	}
 
 	/**
@@ -59,14 +59,14 @@ public class Logger
 	public static void warning(String a_message)
 	{
 		if(!Options.getQuiet())
-			System.err.println(timePrefix() + a_message);
+			java.lang.System.err.println(timePrefix() + a_message);
 	}
 
 	public static void warning(String a_message, Throwable a_exception)
 	{
 		warning(a_message + ": " + a_exception.getMessage());
 		if(!Options.getQuiet() && Options.getVerbose())
-			a_exception.printStackTrace(System.err);
+			a_exception.printStackTrace(java.lang.System.err);
 	}
 
 	/**
@@ -78,14 +78,14 @@ public class Logger
 	public static void debug(String a_message)
 	{
 		if(Options.getVerbose())
-			System.err.println(timePrefix() + a_message);
+			java.lang.System.err.println(timePrefix() + a_message);
 	}
 
 	public static void debug(String a_message, Throwable a_exception)
 	{
 		debug(a_message + ": " + a_exception.getMessage());
 		if(Options.getVerbose())
-			a_exception.printStackTrace(System.err);
+			a_exception.printStackTrace(java.lang.System.err);
 	}
 
 	/**

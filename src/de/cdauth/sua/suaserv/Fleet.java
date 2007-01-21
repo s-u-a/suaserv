@@ -38,7 +38,7 @@ public class Fleet extends JDBCDataset
 		if(instance == null)
 		{
 			instance = new Fleet(a_id);
-			addInstance(Fleet.class, a_id, instance);
+			addInstance(Fleet.class, instance);
 		}
 		return instance;
 	}

@@ -10,7 +10,7 @@ public class BattleItem extends Item
 	private long m_defence = 0;
 
 	public BattleItem(String a_id)
-		throws NumberFormatException
+		throws InstantiationException
 	{
 		super(a_id);
 

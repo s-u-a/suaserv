@@ -17,7 +17,7 @@ public class RobotItem extends Item
 	*/
 
 	public RobotItem(String a_id)
-		throws NumberFormatException
+		throws InstantiationException
 	{
 		super(a_id);
 	}

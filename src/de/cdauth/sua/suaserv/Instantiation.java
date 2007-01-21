@@ -48,12 +48,12 @@ public abstract class Instantiation
 	 * @version 2.0.0
 	*/
 
-	protected static void addInstance(Class a_type, String a_id, Instantiation a_instance)
+	protected static void addInstance(Class a_type, Instantiation a_instance)
 	{
 		if(!sm_instances.containsKey(a_type))
 			sm_instances.put(a_type, new Hashtable<String,Instantiation>());
 		Hashtable<String,Instantiation> type = sm_instances.get(a_type);
-		type.put(a_id, a_instance);
+		type.put(a_instance.getID(), a_instance);
 	}
 
 	/**

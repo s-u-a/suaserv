@@ -12,6 +12,8 @@ import java.sql.SQLException;
 
 public class Galaxy extends JDBCDataset
 {
+	private short m_galaxy;
+
 	/**
 	 * As every class that uses Instantiation, this static method returns
 	 * an instance for the specified galaxy to ensure that not two instances
@@ -21,42 +23,36 @@ public class Galaxy extends JDBCDataset
 	 * @version 2.0.0
 	*/
 
-	public static Galaxy getInstance(String a_id)
+	public static Galaxy getInstance(short a_galaxy)
 		throws InstantiationException,SQLException
 	{
-		Galaxy instance = (Galaxy)getInstance(Galaxy.class, a_id);
+		Galaxy instance = (Galaxy)getInstance(Galaxy.class, makeID(a_galaxy));
 		if(instance == null)
 		{
-			instance = new Galaxy(a_id);
-			addInstance(Galaxy.class, a_id, instance);
+			instance = new Galaxy(a_galaxy);
+			addInstance(Galaxy.class, instance);
 		}
 		return instance;
 	}
 
-	public static void checkExistance(String a_id)
+	public static void checkExistance(short a_galaxy)
 		throws InstantiationException,SQLException
 	{
-		try
-		{
-			PreparedStatement stmt = sm_database.prepareStatement("SELECT count(*) FROM t_planets WHERE c_galaxy = ?");
-			stmt.setShort(1, Short.parseShort(a_id));
-			ResultSet res = stmt.executeQuery();
-			res.next();
-			if(res.getInt(1) < 1)
-				throw new InstantiationException(Galaxy.class, a_id);
-		}
-		catch(NumberFormatException e)
-		{
-			throw new InstantiationException(Galaxy.class, a_id);
-		}
+		PreparedStatement stmt = sm_database.prepareStatement("SELECT count(*) FROM t_planets WHERE c_galaxy = ?");
+		stmt.setShort(1, a_galaxy);
+		ResultSet res = stmt.executeQuery();
+		res.next();
+		if(res.getInt(1) < 1)
+			throw new InstantiationException(Galaxy.class, makeID(a_galaxy));
 	}
 
-	public Galaxy(String a_id)
+	public Galaxy(short a_galaxy)
 		throws InstantiationException,SQLException
 	{
-		m_id = a_id;
+		m_galaxy = a_galaxy;
+		m_id = makeID(a_galaxy);
 
-		checkExistance(m_id);
+		checkExistance(a_galaxy);
 	}
 
 	public static short getGalaxyCount()
@@ -73,17 +69,15 @@ public class Galaxy extends JDBCDataset
 		throws SQLException
 	{
 		short i = 0;
-		try
-		{
-			PreparedStatement stmt = sm_database.prepareStatement("SELECT DISTINCT c_system FROM t_planets WHERE c_galaxy = ?");
-			stmt.setShort(1, Short.parseShort(m_id));
-			ResultSet res = stmt.executeQuery();
-			while(res.next()) i++;
-		}
-		catch(NumberFormatException e)
-		{
-			Logger.warning("Invalid Galaxy DataSet id", e);
-		}
+		PreparedStatement stmt = sm_database.prepareStatement("SELECT DISTINCT c_system FROM t_planets WHERE c_galaxy = ?");
+		stmt.setShort(1, m_galaxy);
+		ResultSet res = stmt.executeQuery();
+		while(res.next()) i++;
 		return i;
+	}
+
+	public static String makeID(short a_galaxy)
+	{
+		return Short.toString(a_galaxy);
 	}
 }

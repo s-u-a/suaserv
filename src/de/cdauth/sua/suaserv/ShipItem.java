@@ -11,6 +11,7 @@ public class ShipItem extends BattleItem
 	private long m_speed = 0;
 
 	public ShipItem(String a_id)
+		throws InstantiationException
 	{
 		super(a_id);
 

@@ -272,12 +272,12 @@ public class Connection extends Thread
 							break;
 						}
 					}
-					catch(UserException e){}
+					catch(InstantiationException e){}
 					sendStatusCode(2, 6);
 					break;
 				case 4: // galaxy
 					requireAuth();
-					try
+					/*try
 					{
 						if(a_arguments.length >= 1)
 						{
@@ -307,10 +307,10 @@ public class Connection extends Thread
 						else // 0 arguments: print galaxy count in the universe
 							sendData(Integer.toString(Galaxy.getGalaxyCount()));
 					}
-					catch(UniverseException e)
+					catch(InstantiationException e)
 					{
 						sendStatusCode(2, 7); // Location not found in the universe
-					}
+					}*/
 					break;
 			}
 		}

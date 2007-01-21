@@ -24,7 +24,7 @@ public class User extends JDBCDataset
 		if(instance == null)
 		{
 			instance = new User(a_id);
-			addInstance(User.class, a_id, instance);
+			addInstance(User.class, instance);
 		}
 		return instance;
 	}
@@ -45,7 +45,7 @@ public class User extends JDBCDataset
 	*/
 
 	public static String resolveName(String a_name)
-		throws UserException
+		throws InstantiationException
 	{
 		return "test";
 	}

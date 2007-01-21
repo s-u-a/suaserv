@@ -20,7 +20,7 @@ public class ItemList extends Hashtable<Item, Long>
 	*/
 
 	public ItemList(String a_list)
-		throws NumberFormatException,IllegalArgumentException
+		throws NumberFormatException,IllegalArgumentException,InstantiationException
 	{
 		super();
 		String[] parts = a_list.split(" ");

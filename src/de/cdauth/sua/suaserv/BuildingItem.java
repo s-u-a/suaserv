@@ -26,7 +26,7 @@ public class BuildingItem extends Item
 	*/
 
 	public BuildingItem(String a_id)
-		throws NumberFormatException
+		throws InstantiationException
 	{
 		super(a_id);
 
