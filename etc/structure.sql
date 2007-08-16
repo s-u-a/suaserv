@@ -7,19 +7,15 @@ CREATE TABLE t_exchange_rate (
 	c_tritium REAL
 );
 
-CREATE TABLE t_fleets (
-	c_fleet_id VARCHAR(32) PRIMARY KEY,
-	c_targets TEXT,
-	finished TEXT
-);
-
 CREATE TABLE t_fleets_targets (
 	c_fleet_id VARCHAR(32),
 	c_galaxy SMALLINT,
 	c_system SMALLINT,
 	c_planet SMALLINT,
 	c_type SMALLINT,
-	c_cost_tritium BIGINT
+	c_cost_tritium BIGINT,
+	c_finished BOOLEAN,
+	c_arrival TIMESTAMP
 );
 
 CREATE TABLE t_fleets_users (
@@ -106,6 +102,17 @@ CREATE TABLE t_building_items (
 	c_cost_aluminium BIGINT,
 	c_cost_wolfram BIGINT,
 	c_cost_radium BIGINT
+);
+
+CREATE TABLE t_remote_fleets (
+	c_galaxy SMALLINT,
+	c_system SMALLINT,
+	c_planet SMALLINT,
+	c_user_id VARCHAR(32),
+	c_from_galaxy SMALLINT,
+	c_from_system SMALLINT,
+	c_from_planet SMALLINT,
+	c_flight_time INTERVAL
 );
 
 CREATE TABLE t_friendship_requests (
